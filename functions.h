@@ -6,15 +6,13 @@
 using namespace std;
 
 // Declare functions 
-void calculateProfitLoss(float openingPrice, float closingPrice, const string& assetName);
+void ProfitLoss(float open, float close, string name);
+void wantTransact(string ans, int amount, float price);
+void print_data(string name, string exchange, string currency, float open, float high, float low, float close, float volume, float change, float price);
+void Sendsignal(float price, float high, float low, string ans, int amount);
 
-void processTransactionDecision(const string& decision, int quantity, float price);
+void printTerminationMessage();
 
-void displayMarketData(const string& name, const string& exchange, const string& currency, 
-                       float openingPrice, float highPrice, float lowPrice, float closingPrice, 
-                       float volume, float change, float currentPrice);
-
-void generateTradeSignal(float currentPrice, float highPrice, float lowPrice, 
-                         const string& decision, int quantity);
+bool ContinueSim();
 
 #endif // FUNCTIONS_H 

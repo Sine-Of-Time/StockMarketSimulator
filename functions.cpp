@@ -3,7 +3,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void ProfitLoss(float open, float close, std::string name) {
+void ProfitLoss(float open, float close, string name) {
     float percentage_change = ((close - open) / open) * 100;
 
     if (percentage_change > 0) {
@@ -56,6 +56,24 @@ void Sendsignal(float price, float high, float low, string ans, int amount){
         wantTransact(ans, amount, price);
     }
     else{
-        cout << "This stock should not be brought nor sold. \n\n";
+        cout << "This stock should not be brought nor sold. \n";
     }
+}
+
+bool ContinueSim(){
+    while(true){
+        string answer;
+        cout << "Would you like to buy/sell an stock? Y/N:" << endl;
+        cin >> answer;
+        for (char &c : answer) {
+            c = std::tolower(c); 
+        }
+        if(answer=="n")return false;
+        if(answer=="y")return true;
+        cout <<"Invalid Input, you can only enter y or n."<< endl;
+    }
+}
+
+void printTerminationMessage() {
+    cout << "Program is terminating." << endl;
 }
