@@ -46,8 +46,7 @@ int main() {
         }
         print_data(name, exchange, currency, open, high, low, close, volume, change, price);
         ProfitLoss(open, close, name);
-        Sendsignal(price, high, low, ans, amount);
-        this_thread::sleep_for(chrono::milliseconds(3000));
+        wantTransact(price, high, low, ans, amount);   
         quit=ContinueSim();
     }    
     printTerminationMessage();
