@@ -3,6 +3,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Simply calculates a percentage and then displays it
 void ProfitLoss(float open, float close, string name) {
     float percentage_change = ((close - open) / open) * 100;
 
@@ -15,20 +16,39 @@ void ProfitLoss(float open, float close, string name) {
     }
 }
 
-void wantTransact(string ans, int amount, float price) {
-    cout << "/nInput the number of shares to buy/sell: ";
-    cin >> amount;
-    cout << "\n Would you like to know the price of this stock? \n";
-    cout << "Your Response: ";
-    cin >> ans;
-    transform(ans.begin(), ans.end(), ans.begin(), ::toupper);
-    if (ans == "Y") {
-        cout << "\nStock Price: " << amount * price << "\n";
-    } else if (ans == "N") {
-        
-    } else {
-        cout << "\nInvalid Choice\n";
+void wantTransact(float price, float high, float low, string ans, int amount) {
+    string shouldBuy;
+    bool stopLoop=false;
+
+    if(price <= low){
+        cout << "Tip: This stock is doing well\n";
     }
+    else if(price >= high){
+        cout << "Tip: This stock is not doing well\n";
+    }
+    else{
+        cout << "Tip: Not much activity for this stock" << endl;
+    }
+
+    while(stopLoop==false){
+        cout << "Would you like to buy this stock?:"<< endl;
+        cin >> shouldBuy;
+        for(char &c : shouldBuy) {
+                c = tolower(c); 
+            }
+        if(shouldBuy=="n")return;
+        if(shouldBuy=="y"){
+            stopLoop=true;
+            break;
+        }
+        cout << "Invalid input. Please only enter Y or N." << endl;
+    }
+
+    cout << "Input the number of shares to buy/sell:" << endl;
+    cin >> amount;
+    cout << "You brought ";
+    cout << amount;
+    cout << " shares."<<endl;
 }
 
 void print_data(string name, string exchange, string currency, float open, float high, float low, float close, float volume, float change, float price) {
@@ -46,27 +66,13 @@ void print_data(string name, string exchange, string currency, float open, float
         "Current Price: " << price << "\n";
 }
 
-void Sendsignal(float price, float high, float low, string ans, int amount){
-    if(price <= low){
-        cout << "Buying Stock\n\n";
-        wantTransact(ans, amount, price);
-    }
-    else if(price >= high){
-        cout << "Selling Stock\n\n";
-        wantTransact(ans, amount, price);
-    }
-    else{
-        cout << "This stock should not be brought nor sold. \n";
-    }
-}
-
 bool ContinueSim(){
     while(true){
         string answer;
-        cout << "Would you like to buy/sell an stock? Y/N:" << endl;
+        cout << "Would you like to look at another an stock? Y/N:" << endl;
         cin >> answer;
         for (char &c : answer) {
-            c = std::tolower(c); 
+            c = tolower(c); 
         }
         if(answer=="n")return false;
         if(answer=="y")return true;
